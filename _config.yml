@@ -1,0 +1,72 @@
+# Site wide configuration
+
+title: Sam Nazarian
+locale: en_US
+description: software engineer
+#logo: site-logo.png
+search: false
+#url: http://github.snazar.com
+
+# Jekyll configuration
+
+permalink:   /:categories/:title/
+markdown:    kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+#  - jekyll-sitemap
+#  - jekyll-gist
+
+kramdown:
+  input: GFM
+  syntax_highligter: rouge
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..2
+
+mathjax: false
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+
+
+# Octopress
+
+# Default extensions
+post_ext: md
+page_ext: md
+
+# Found in _templates/
+post_layout: post
+page_layout: page
+
+# Format titles with titlecase?
+titlecase: true
+
+
+# Site owner
+owner:
+  name: Sam Nazarian
+  avatar: sam-site.jpg
+  email: nazarian@gmail.com
+  disqus-shortname:
+  twitter: snazarian
+  facebook: #username
+  github: samnazar
+  stackexchange: #http://stackoverflow.com/users/123456/username
+  linkedin: samnazarian
+  instagram: #username
+  flickr: #username
+  tumblr: #username
+  pinterest: #username
+  weibo: #userid
+  google:
+    plus: #username
+    analytics:
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
