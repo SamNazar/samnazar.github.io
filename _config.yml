@@ -2,7 +2,7 @@
 
 title: Sam Nazarian
 locale: en_US
-description: software engineer
+description: "software engineer"
 #logo: site-logo.png
 search: false
 #url: http://github.snazar.com
@@ -16,8 +16,8 @@ sass:
   sass_dir: _sass
   style: compressed
 gems:
-#  - jekyll-sitemap
-#  - jekyll-gist
+  - jekyll-sitemap
+  - jekyll-gist
 
 kramdown:
   input: GFM
