@@ -5,7 +5,7 @@ locale: en_US
 description: "software engineer"
 #logo: site-logo.png
 search: false
-#url: http://github.snazar.com
+url: http://github.snazar.com
 
 # Jekyll configuration
 

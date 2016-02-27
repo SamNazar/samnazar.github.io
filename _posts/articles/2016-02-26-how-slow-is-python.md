@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "How Slow Is Python?"
-#modified:
+modified:
 categories: articles
 excerpt: "A comparison of CPython, other Python implementations, and other languages"
 tags: [python, software]
-#image:
-#  feature:
+image:
+  feature:
 date: 2016-02-26
 ---
 
