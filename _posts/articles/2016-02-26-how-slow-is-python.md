@@ -10,7 +10,7 @@ image:
 date: 2016-02-26
 ---
 
-I like solving problems from [TopCoder](http://topcoder.com) competitions for fun.  The site offers a variety of language options, including C++, C#, Java, and Python. 
+I like solving problems from [TopCoder](http://topcoder.com) competitions for fun.  The site offers a variety of language options, including C++, C#, Java, and Python.
 
 ## The Problem
 One problem in [SRM 295][srm-295] called **BuildBridge** (2nd problem on that page) highlighted an issue that often comes up in discussions of Python: **Performance**.  In short, it asks how many cards of width `L` have to be stacked on top of one another to create a bridge that can span width `D`.  To get the full text of the problem definition, you'll need to log into TopCoder.
@@ -107,7 +107,7 @@ IronPython and Jython are really meant more for interoperability of code, so we 
 Interestingly, Cython (with its type annotations) didn't give us much of a boost over PyPy.  The impressive performance from PyPy, C#, and Java demonstrate the power of JIT compilation.
 
 ## What's going on in there?
-For a lark, I ran the unoptimized solution through a Python [line profiler](https://github.com/rkern/line_profiler) to see if any particular line was tripping up CPython.  
+For a lark, I ran the unoptimized solution through a Python [line profiler](https://github.com/rkern/line_profiler) to see if any particular line was tripping up CPython.
 
 ```
 Line #      Hits         Time  Per Hit   % Time  Line Contents
@@ -121,10 +121,10 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
      8  36865412     16984466      0.5     24.0              denom += 2
      9  36865412     20937285      0.6     29.6              hang += (1 / denom) * L
     10  36865412     16011337      0.4     22.6              cards += 1
-    11         1            1      1.0      0.0          return cards     
+    11         1            1      1.0      0.0          return cards
 ```
 
-We can see the line with the multiplication and division taking about 23% longer than the others, but nothing really stands out here.  CPython is just plain slow.
+We can see the line with the multiplication and division taking a bit longer than the others, but nothing really stands out here.  For more on what exactly CPython is doing, check out [Why Python is Slow](https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/) by Jake VanderPlas.
 
 ## So why use CPython over PyPy?
 If you want Python 3.5, your only option is CPython.  While PyPy3 does support 3.2.5, it is based on an older version of PyPy and can occasionally be much slower.
@@ -133,24 +133,24 @@ If you're running a web app or service through something like Django, Flask or B
 
 I ended up creating a few virtual environments on my development machine (using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/)).  This makes it easy to switch between different implementations depending on your needs.  
 
-Some of the cool new Python features you can't yet use with PyPy include [PEP 448](https://www.python.org/dev/peps/pep-0448/).  I recently learned about this in a [great article about 'Pythonicness' and readability][trey-article] by [Trey Hunner][trey].  If you look at the performance comparison linked from the article, you'll see that using the `**` dictionary unpacking operator is actually the fastest method of the ones listed. 
+Some of the cool new Python features you can't yet use with PyPy include [PEP 448](https://www.python.org/dev/peps/pep-0448/).  I recently learned about this in a [great article about 'Pythonicness' and readability][trey-article] by [Trey Hunner][trey].  If you look at the performance comparison linked from that article, you'll see that using the `**` dictionary unpacking operator is actually the fastest method of the ones listed.
 
 Many features, like the `enum` module, have been [back-ported][enum34] to previous versions of Python.  A quick `pip install` was the only change required to get a [personal project][codewords-game] I've been working on running with PyPy3.
 
+
 ## Not a very useful benchmark
-Real-world programs rarely consist only loops of simple arithmetic with no data structures and tens of millions of iterations.  Our TopCoder example has CPython (2.7) running about 40 times slower than PyPy, but [PyPy's own benchmarks][pypy-speed] (which use a variety of more realistic use-cases) show CPython to be "only" about 9 times slower.  
+Real-world programs rarely consist only of loops of simple arithmetic with no data structures or I/O and tens of millions of iterations.  Our TopCoder example has CPython (2.7) running about 40 times slower than PyPy, but [PyPy's own benchmarks][pypy-speed] (which use a variety of more realistic use-cases) show CPython to be "only" about 9 times slower.
 
 In many cases, performant external libraries written with C (like SciPy or NumPy) are doing the heavy lifting.
 
 ## The Takeaway
 * CPython is an interpreter not primarily concerned with performance.
-* Python is not inherently slow, at least no more than C# or Java.
+* Python is not inherently slow, at least not significantly more than C# or Java.
 * If you are writing pure Python and care about its performance, use PyPy (or maybe Cython).
 * If you're on TopCoder and you think the solution may require a lot of computation, consider using a different language (or at least be aware of potential pitfalls).
 
 ### Recommended Reads:
 * [A beginners guide to using Python for performance computing][pyperformance]
-* [Why Python is Slow](https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/) by Jake VanderPlas
 * [Falcon Framework's benchmarks][falconbenchmarks]
 
 [srm-295]: https://community.topcoder.com/tc?module=Static&d1=match_editorials&d2=srm295

@@ -2,10 +2,10 @@
 
 title: Sam Nazarian
 locale: en_US
-description: "software engineer"
+description: 
 #logo: site-logo.png
 search: false
-url: http://github.snazar.com
+url: #http://github.snazar.com
 
 # Jekyll configuration
 
