@@ -1,3 +1,3 @@
 # Github Pages Site
 
-You can find the site at [github.snazar.com](http://github.snazar.com).
+You can find the site at [snazar.com](http://www.snazar.com).
