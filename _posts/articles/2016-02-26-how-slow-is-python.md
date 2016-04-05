@@ -3,7 +3,7 @@ layout: post
 title: "How Slow Is Python?"
 modified:
 categories: articles
-excerpt: "A comparison of CPython, other Python implementations, and other languages"
+excerpt: "A comparison of CPython, other Python implementations, and other languages."
 tags: [python, software]
 image:
   feature:
