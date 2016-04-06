@@ -92,3 +92,5 @@ Now reload the setup.php page.  Everything should be green and we can hit the "C
 You should now be redirected to the [login page](http://localhost/dvwa/login.php).  The default credentials are admin/password.
 
 You can shut down the VM and save state to pick up where you left off.
+
+Thanks to [Linh Nguyen](https://theotherlinh.com/) for some useful notes and input.
