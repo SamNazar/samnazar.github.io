@@ -140,6 +140,13 @@ You can shut down the VM and save state to pick up where you left off.
 Thanks to [Linh Nguyen](https://theotherlinh.com/) for some useful notes and input.
 
 ## TL;DD:
-If you don't care about any of the tools that come with Kali, use Vagrant and Scotch-Box instead.  
+If you don't care about any of the tools that come with Kali, you can use Vagrant and Scotch-Box instead.  Start out by following the [get started guide on the Scotch-Box site](https://box.scotch.io/#get-started).
 
-You will still need to edit DVWA's `config/config.inc.php` to change the MySQL password to `root`.  You will also need to enable `allow_url_include` in the VM's `etc/php5/apache2/php.ini` by SSHing into the running VM as u:vagrant / p:vagrant (`ssh vagrant@127.0.0.1 -p 2222`).
+* You will still need to edit DVWA's `config/config.inc.php` to change the MySQL password to `root`.  
+* You'll also need to enable `allow_url_include` in the VM's `etc/php5/apache2/php.ini`
+    * From within your project's folder: `vagrant ssh`
+    * `sudo nano /etc/php5/apache2/php.ini`
+    * Ctrl+W, `allow_url_include`, change it to `On`
+    * Ctrl+X, then say [Y]es.
+    * `sudo service apache2 restart`
+    * `exit`
