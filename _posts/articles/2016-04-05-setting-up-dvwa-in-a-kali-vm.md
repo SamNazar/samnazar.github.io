@@ -16,7 +16,7 @@ date: 2016-04-05
 
 The creators of DVWA recommend that you play with it in a VM sandbox.  This can be done in a few ways:
 
-1. Use [Vagrant](https://www.vagrantup.com/) and [Scotch-Box](https://box.scotch.io/)
+1. Use [Vagrant](https://www.vagrantup.com/) and [Scotch-Box](https://box.scotch.io/) (see TL;DD at the end of this post)
 2. Install XAMPP into a vanilla VM
 3. Install from the [DVWA LiveCD](http://www.dvwa.co.uk/DVWA-1.0.7.iso) and then update DVWA itself to the newest version (1.9 as of this writing)
 4. Install DVWA in a Kali Linux VM
@@ -87,10 +87,59 @@ You'll see that a few items on the setup checklist are red.  This will keep us f
 
 Now reload the setup.php page.  Everything should be green and we can hit the "Create / Reset Database" button at the bottom.
 
+## If you want to work from outside the VM:
+Everything should be working now, but we may prefer to use our host OS to do our actual work with DVWA.  We'll need to change a network setting and install an SSH server.
+
+### Switch to Bridged Adapter mode
+VirtualBox probably defaulted the guest OS's network to NAT mode.  This worked fine for our apt-gets and such, but won't let us access the Apache web server.  In our VM's machine -> preferences menu, go to the Network tab and set `Attached to:` to `Bridged Adapter`.  It may take a moment for the changes to take place.  See the [VirtualBox manual](https://www.virtualbox.org/manual/ch06.html) for more information on the different networking modes.
+
+### Setup SSH
+You can follow [this guide by a guy who calls himself Dr.Chaos](http://www.drchaos.com/enable-ssh-on-kali-linux-enable-ssh-on-kali-linux/) to get SSH working (you'll need to run the commands as superuser).  You can skip steps 4 and 5.  Since we already made a user in the superuser group, we can just log in as that user instead of as root.
+
+### Access to DVWA on your Host OS's browser
+In the VM's terminal, type `hostname -I` to get the IP address.  Point your browser to `http://<kali-ip>/dvwa/`.
+
+### SSH into into Kali
+If MacOS is your host OS, you can type `ssh <username-we-created>@<kali-ip>` in the terminal to connect.
+
+### Setup a network share
+Follow [this guide on installing samba](https://help.ubuntu.com/community/How%20to%20Create%20a%20Network%20Share%20Via%20Samba%20Via%20CLI%20(Command-line%20interface/Linux%20Terminal)%20-%20Uncomplicated,%20Simple%20and%20Brief%20Way!).  
+
+I added the following section to my `/etc/samba/smb.conf`:
+
+```
+[dvwa]
+   comment = DVWA Folder
+   path = /var/www/html/dvwa
+   writeable = yes
+   browseable = yes
+   public = yes
+   read only = no
+   create mask = 0644
+   force create mode = 0755
+   valid users = <user-we-created>
+```
+
+Add the user we created in this guide when the guide above tells you to add a Samba user.
+
+To be able to actually change the files through the Samba share, you'll need to `sudo chown -R <user-we-created> /var/www/html/dvwa`
+
+Now connect to `smb://<user-we-created>@<kali-ip>/dvwa` in Finder/Explorer/Nautilus/etc.
+
+You should be able to point your favorite editor to the share and make changes to the files.  In OSX, it should be in the folder `/Volumes/dvwa`.  If your preferred editor is Sublime Text, you could run `subl /Volumes/dvwa`.
+
+
 ## All Set!
 
-You should now be redirected to the [login page](http://localhost/dvwa/login.php).  The default credentials are admin/password.
+Now you can navigate to the login page at [http://localhost(or-kali-ip)/dvwa/login.php](http://localhost/dvwa/login.php).  The default credentials are admin/password.
 
 You can shut down the VM and save state to pick up where you left off.
 
+**NOTE:** If you see a launch-bar in the VM but it otherwise seems unresponsive, try pressing Enter.  The screen has auto-locked and you'll have to re-enter your password.
+
 Thanks to [Linh Nguyen](https://theotherlinh.com/) for some useful notes and input.
+
+## TL;DD:
+If you don't care about any of the tools that come with Kali, use Vagrant and Scotch-Box instead.  
+
+You will still need to edit DVWA's `config/config.inc.php` to change the MySQL password to `root`.  You will also need to enable `allow_url_include` in the VM's `etc/php5/apache2/php.ini` by SSHing into the running VM as u:vagrant / p:vagrant (`ssh vagrant@127.0.0.1 -p 2222`).
