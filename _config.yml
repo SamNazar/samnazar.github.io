@@ -2,12 +2,16 @@
 
 title: Sam Nazarian
 locale: en_US
-description: 
+description: Software Engineer
 #logo: site-logo.png
 search: false
 url: https://www.snazar.com
 
 # Jekyll configuration
+
+plugins:
+  - jekyll-remote-theme
+remote_theme: "mmistakes/so-simple-theme@3.2.0"
 
 permalink:   /:categories/:title/
 markdown:    kramdown
