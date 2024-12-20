@@ -5,8 +5,6 @@ modified:
 categories: articles
 excerpt: "A guide to installing a vulnerable Web application in a security-testing oriented Linux distribution."
 tags: [software, security, php, Linux]
-image:
-  feature:
 date: 2016-04-05
 ---
 

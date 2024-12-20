@@ -9,43 +9,49 @@ url: https://www.snazar.com
 
 # Jekyll configuration
 
+skin: "/assets/css/skins/default.css"
+
 plugins:
   - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+
 remote_theme: "mmistakes/so-simple-theme@3.2.0"
 
 permalink:   /:categories/:title/
 markdown:    kramdown
-highlighter: rouge
-sass:
-  sass_dir: _sass
-  style: compressed
+feed:
+  path: atom.xml
 
-kramdown:
-  input: GFM
-  syntax_highligter: rouge
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..2
+date_format: "%B %-d, %Y"
 
-mathjax: false
+mathjax:
+  enable: # MathJax equations, e.g. true, false (default)
+  combo:  # "tex-svg" (default), "tex-mml-chtml", etc.: docs.mathjax.org/en/latest/web/components/combined.html
+  tags:  # "none", "ams" (default), "all"
+google_fonts:
+  - name: "Source Sans Pro"
+    weights: "400,400i,700,700i"
+  - name: "Lora"
+    weights: "400,400i,700,700i"
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
 
+# Search
+search_full_content: false # can have performance implications for large sites
 
-# Octopress
-
-# Default extensions
-post_ext: md
-page_ext: md
-
-# Found in _templates/
-post_layout: post
-page_layout: page
-
-# Format titles with titlecase?
-titlecase: true
+# Front Matter Defaults
+defaults:
+  # Posts defaults
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+      share: true
 
 
 # Site owner
@@ -53,21 +59,32 @@ owner:
   name: Sam Nazarian
   avatar: sam-site.jpg
   email: nazarian@gmail.com
-  disqus-shortname:
   twitter: #snazarian
   facebook: #username
   github: SamNazar
   stackexchange: #http://stackoverflow.com/users/123456/username
   linkedin: samnazarian
-  instagram: #username
-  flickr: #username
-  tumblr: #username
-  pinterest: #username
-  weibo: #userid
-  google:
-    plus: #username
-    analytics:
-    verify:
-    ad-client:
-    ad-slot:
-  bing-verify:
+
+# Site Author
+author:
+  name: Sam Nazarian
+  picture: /images/sam-site.jpg
+  email: sam@snazar.com
+  links:
+    - title: GitHub
+      url: https://github.com/SamNazar
+      icon: fab fa-github-square
+    - title: LinkedIn
+      url: https://www.linkedin.com/in/samnazarian
+      icon: fab fa-linkedin
+# Footer Links
+footer_links:
+  - title: GitHub
+    url: https://github.com/SamNazar
+    icon: fab fa-github-square
+  - title: LinkedIn
+    url: https://www.linkedin.com/in/samnazarian
+    icon: fab fa-linkedin
+  - title: Feed
+    url: atom.xml
+    icon: fas fa-rss-square
